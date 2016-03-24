@@ -1,0 +1,5 @@
+check process flaky_network
+  with  pidfile /var/vcap/sys/run/flaky_network/flaky_network.pid
+  start program "/var/vcap/jobs/flaky_network/bin/flaky_network start"
+  stop  program "/var/vcap/jobs/flaky_network/bin/flaky_network stop"
+  group vcap

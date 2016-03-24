@@ -1,0 +1,19 @@
+---
+name: flaky_network
+templates:
+  flaky_network.erb: bin/flaky_network
+
+packages:
+  - comcast
+
+properties:
+  flaky_network.packet_loss:
+    description: percentage of packets to drop (Required)
+    example: '10%'
+  flaky_network.target_addr:
+    description: list of addresses to affect (Required).
+    example: '8.8.8.8,10.0.0.0/24'
+  flaky_network.target_port:
+    description: list of ports to affect (Optional).
+    example: '80,22,1000:2000'
+    default: '1:65535'

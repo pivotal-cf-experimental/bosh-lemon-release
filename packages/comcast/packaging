@@ -1,0 +1,8 @@
+set -e
+
+# We built the comcast binary from source
+# Rebuild in a docker container or similar
+
+mkdir -p ${BOSH_INSTALL_TARGET}/bin
+chmod +x comcast/comcast
+cp comcast/comcast ${BOSH_INSTALL_TARGET}/bin/comcast

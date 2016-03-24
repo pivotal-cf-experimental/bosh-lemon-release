@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+
+set -e
+
+export PATH=/var/vcap/packages/comcast/bin:$PATH
+RUN_DIR=/var/vcap/sys/run/flaky_network
+LOG_DIR=/var/vcap/sys/log/flaky_network
+
+mkdir -p $RUN_DIR $LOG_DIR
+
+LOGFILE=${LOG_DIR}/flaky_network.log
+PIDFILE=${RUN_DIR}/flaky_network.pid
+
+FLAKY_PACKET_LOSS="<%= p('flaky_network.packet_loss') %>"
+FLAKY_TARGET_ADDR="<%= p('flaky_network.target_addr') %>"
+FLAKY_TARGET_PORT="<%= p('flaky_network.target_port') %>"
+
+case $1 in
+  start)
+    echo $$ > $PIDFILE
+
+    comcast --packet-loss=${FLAKY_PACKET_LOSS} \
+            --target-addr=${FLAKY_TARGET_ADDR} \
+            --target-port=${FLAKY_TARGET_PORT} \
+            --target-proto=tcp,udp,icmp >> ${LOGFILE} 2>&1
+
+    sleep inf
+    ;;
+
+  stop)
+    comcast --stop >> ${LOGFILE} 2>&1
+    kill -9 "$(cat $PIDFILE)"
+    rm -f $PIDFILE
+    ;;
+
+  *)
+    echo "Usage: flaky_network {start|stop}"
+    ;;
+esac
+
+exit 0
