@@ -1,0 +1,16 @@
+---
+packages:
+- name: comcast
+  version: 64ec97b10f06bd63a5afd94452438b9a4a47a7ac
+  fingerprint: 64ec97b10f06bd63a5afd94452438b9a4a47a7ac
+  sha1: 0b02fdc5996964e0d970a60262472cc975be2b7a
+  dependencies: []
+jobs:
+- name: flaky_network
+  version: 8ae4d82463dcb66adbeff144cfad0232a93034cb
+  fingerprint: 8ae4d82463dcb66adbeff144cfad0232a93034cb
+  sha1: 850c62dd2570658c9c4cb9693b5871d70f5d1a1c
+commit_hash: db16efc2
+uncommitted_changes: true
+name: bosh-lemon-release
+version: 1.0.0
